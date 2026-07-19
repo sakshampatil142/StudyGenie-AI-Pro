@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyGenie AI Pro</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- PDF JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="bg1"></div>
+<div class="bg2"></div>
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-robot"></i>
+
+        <h2>StudyGenie AI</h2>
+
+    </div>
+
+    <ul>
+
+        <li class="active">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </li>
+
+        <li>
+            <i class="fa-solid fa-file-lines"></i>
+            Summary
+        </li>
+
+        <li>
+            <i class="fa-solid fa-book"></i>
+            Formula Sheet
+        </li>
+
+        <li>
+            <i class="fa-solid fa-layer-group"></i>
+            Flashcards
+        </li>
+
+        <li>
+            <i class="fa-solid fa-circle-question"></i>
+            MCQs
+        </li>
+
+        <li>
+            <i class="fa-solid fa-calendar-days"></i>
+            Study Planner
+        </li>
+
+        <li>
+            <i class="fa-solid fa-chart-line"></i>
+            Analytics
+        </li>
+
+        <li>
+            <i class="fa-solid fa-gear"></i>
+            Settings
+        </li>
+
+    </ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main">
+
+<header>
+
+<div>
+
+<h1>
+
+📚 StudyGenie AI Pro
+
+</h1>
+
+<p>
+
+AI Powered Smart Learning Assistant
+
+</p>
+
+</div>
+
+<button class="theme">
+
+🌙 Dark Mode
+
+</button>
+
+</header>
+
+<!-- Hero -->
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h2>
+
+Study Smarter,
+Not Harder
+
+</h2>
+
+<p>
+
+Upload your PDF notes and let AI generate:
+
+Summary,
+Flashcards,
+Formula Sheet,
+MCQs,
+Study Planner,
+Expected Questions,
+and Explain Like I'm 10.
+
+</p>
+
+<button class="primary">
+
+Get Started
+
+</button>
+
+</div>
+
+<div class="hero-image">
+
+<i class="fa-solid fa-robot robot"></i>
+
+</div>
+
+</section>
+
+<!-- Upload Section -->
+
+<section class="upload-section">
+
+<div class="glass-card">
+
+<h2>
+
+📄 Upload PDF
+
+</h2>
+
+<input
+type="file"
+id="file"
+accept=".pdf">
+
+<button onclick="uploadFile()">
+
+Upload Notes
+
+</button>
+
+</div>
+
+</section>
+
+<!-- AI Cards -->
+
+<section class="cards">
+
+<div class="card">
+
+<h3>📄 Summary</h3>
+
+<p>Generate AI Summary</p>
+
+<button onclick="generateSummary()">
+
+Generate
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>📒 Formula Sheet</h3>
+
+<p>Extract Formulas</p>
+
+<button onclick="generateFormula()">
+
+Generate
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>🧠 Flashcards</h3>
+
+<p>Generate Revision Cards</p>
+
+<button onclick="generateFlashcards()">
+
+Generate
+
+</button>
+
+</div>
+<div class="card">
+
+<h3>❓ MCQ Generator</h3>
+
+<p>Create Exam MCQs</p>
+
+<button onclick="generateQuiz()">
+
+Generate
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>📅 Study Planner</h3>
+
+<p>Create 7-Day Plan</p>
+
+<button onclick="generateStudyPlan()">
+
+Generate
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>👶 Explain Simply</h3>
+
+<p>Explain Like I'm 10</p>
+
+<button onclick="explainSimple()">
+
+Generate
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>🎯 Expected Questions</h3>
+
+<p>Predict University Questions</p>
+
+<button onclick="expectedQuestions()">
+
+Generate
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- AI OUTPUT -->
+<!-- ========================= -->
+
+<section class="output-section">
+
+<div class="section-header">
+
+<h2>
+
+🤖 AI Output
+
+</h2>
+
+<div class="actions">
+
+<button onclick="copyOutput()">
+
+📋 Copy
+
+</button>
+
+<button onclick="downloadOutput()">
+
+⬇ Download
+
+</button>
+
+<button id="voiceBtn">
+
+🔊 Read Aloud
+
+</button>
+
+<button onclick="clearOutput()">
+
+🗑 Clear
+
+</button>
+
+</div>
+
+</div>
+
+<div
+id="output"
+class="output-box">
+
+Welcome to StudyGenie AI 🚀
+
+Upload your PDF and click any AI feature.
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- DASHBOARD -->
+<!-- ========================= -->
+
+<section class="dashboard">
+
+<h2>
+
+📊 Learning Dashboard
+
+</h2>
+
+<div class="dashboard-grid">
+
+<div class="dash-card">
+
+<i class="fa-solid fa-book-open"></i>
+
+<h3 id="topics">
+
+0
+
+</h3>
+
+<p>
+
+PDF Pages
+
+</p>
+
+</div>
+
+<div class="dash-card">
+
+<i class="fa-solid fa-layer-group"></i>
+
+<h3 id="flashCount">
+
+0
+
+</h3>
+
+<p>
+
+Flashcards
+
+</p>
+
+</div>
+
+<div class="dash-card">
+
+<i class="fa-solid fa-circle-question"></i>
+
+<h3 id="mcqCount">
+
+0
+
+</h3>
+
+<p>
+
+MCQs
+
+</p>
+
+</div>
+
+<div class="dash-card">
+
+<i class="fa-solid fa-chart-column"></i>
+
+<h3>
+
+100%
+
+</h3>
+
+<p>
+
+AI Powered
+
+</p>
+
+</div>
+
+</div>
+
+<div class="chart-card">
+
+<canvas id="progressChart"></canvas>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- FEATURES -->
+<!-- ========================= -->
+
+<section class="features">
+
+<h2>
+
+✨ Premium Features
+
+</h2>
+
+<div class="feature-grid">
+
+<div class="feature">
+
+<i class="fa-solid fa-brain"></i>
+
+<h3>
+
+AI Powered
+
+</h3>
+
+<p>
+
+Uses Dify AI to generate smart study material.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+<h3>
+
+PDF Reader
+
+</h3>
+
+<p>
+
+Reads complete PDFs using PDF.js.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+<h3>
+
+Exam Ready
+
+</h3>
+
+<p>
+
+Generate summaries and quizzes instantly.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-bolt"></i>
+
+<h3>
+
+Lightning Fast
+
+</h3>
+
+<p>
+
+AI responses in seconds.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- Testimonials -->
+<!-- ========================= -->
+
+<section class="testimonials">
+
+    <h2 class="section-title">
+        ⭐ Student Reviews
+    </h2>
+
+    <div class="testimonial-grid">
+
+        <div class="testimonial">
+
+            <img src="https://i.pravatar.cc/100?img=12">
+
+            <h3>Rahul Sharma</h3>
+
+            <p>
+                "StudyGenie reduced my revision time by almost 60%.
+                The flashcards are amazing!"
+            </p>
+
+        </div>
+
+        <div class="testimonial">
+
+            <img src="https://i.pravatar.cc/100?img=32">
+
+            <h3>Aditi Patel</h3>
+
+            <p>
+                "The AI summaries are better than my handwritten notes.
+                Highly recommended."
+            </p>
+
+        </div>
+
+        <div class="testimonial">
+
+            <img src="https://i.pravatar.cc/100?img=45">
+
+            <h3>Arjun Mehta</h3>
+
+            <p>
+                "The MCQ generator helped me score much better in exams."
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Floating Buttons -->
+<!-- ========================= -->
+
+<button id="scrollTop" class="floating-btn">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<!-- ========================= -->
+<!-- Footer -->
+<!-- ========================= -->
+
+<footer>
+
+<div class="footer-left">
+
+<h2>
+
+📚 StudyGenie AI Pro
+
+</h2>
+
+<p>
+
+AI Powered Study Assistant
+
+</p>
+
+</div>
+
+<div class="footer-center">
+
+<h3>
+
+Quick Links
+
+</h3>
+
+<ul>
+
+<li>Dashboard</li>
+
+<li>Summary</li>
+
+<li>Flashcards</li>
+
+<li>MCQs</li>
+
+<li>Study Planner</li>
+
+</ul>
+
+</div>
+
+<div class="footer-right">
+
+<h3>
+
+Connect
+
+</h3>
+
+<div class="social">
+
+<i class="fab fa-github"></i>
+
+<i class="fab fa-linkedin"></i>
+
+<i class="fab fa-instagram"></i>
+
+<i class="fab fa-discord"></i>
+
+</div>
+
+</div>
+
+</footer>
+
+</main>
+
+<!-- Loading Overlay -->
+
+<div id="loadingScreen" class="loading-screen">
+
+<div class="loader"></div>
+
+<h2>
+
+Generating AI Response...
+
+</h2>
+
+</div>
+
+<!-- Confetti -->
+
+<div id="confetti"></div>
+
+<!-- Scripts -->
+
+<script src="config.js?v=2"></script>
+
+<script src="script.js?v=2"></script>
+
+</body>
+
+</html>
